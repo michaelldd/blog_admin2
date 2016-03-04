@@ -50,7 +50,7 @@ public class RoleGroupService implements IRoleGroupService{
 	public void updateRoleGroup(Map roleGroup) {
 		//获取roleGroup后再获取tree
 		Map father = this.getRoleGroupById((Long)roleGroup.get("upperRoleGroupId"));
-		String newTree = father.get("tree") +""+ roleGroup.get("deptId")+SPT.DOT.getSpt();
+		String newTree = father.get("tree") +""+ roleGroup.get("roleGroupId")+SPT.DOT.getSpt();
 		roleGroup.put("tree", newTree);
 		
 		String oldTree = (String) roleGroup.get("tree");
