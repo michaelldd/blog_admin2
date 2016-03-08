@@ -1,5 +1,5 @@
 # 对比blog_admin
-- Controller method只对应一个url
+- Controller method只对应一个url（符合单一方法处理单一任务的原则，也方便后续功能扩展，解耦）
 - 增加线程安全token机制的服务器端防止重复提交功能
 
 
