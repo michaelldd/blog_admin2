@@ -53,7 +53,7 @@ public class LoginController extends BaseController{
 	@RequestMapping("logout")
 	public String logout(){
 		SecurityUtils.getSubject().logout();
-		return "redirect:/core/login";
+		return "redirect:/core/login_view";
 	}
 	
 	@RequestMapping("unauthorized")

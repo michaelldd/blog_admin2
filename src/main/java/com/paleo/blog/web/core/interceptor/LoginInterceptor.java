@@ -9,7 +9,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.paleo.blog.model.sys.account.AccountUtils;
-import com.paleo.blog.remote.sys.account.IAccountService;
 
 /**
  * 登陆拦截器，存储一些账号信息进session
@@ -18,8 +17,6 @@ import com.paleo.blog.remote.sys.account.IAccountService;
  */
 public class LoginInterceptor implements HandlerInterceptor{
 
-	@Resource(name="blog.service.sys.account.imp.AccountService")
-	IAccountService accountService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler)
@@ -36,8 +33,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception ex)
 			throws Exception {
-		Long userId = (Long) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();//这里为什么可以取到userId？看LoginRealm源码
-		AccountUtils.setUserId(userId);
+		if(SecurityUtils.getSubject().isAuthenticated()){
+			Long userId = (Long) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();//这里为什么可以取到userId？看LoginRealm源码
+			AccountUtils.setUserId(userId);
+		}
 	}
 	
 }
